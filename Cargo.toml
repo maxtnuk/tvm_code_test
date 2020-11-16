@@ -1,0 +1,19 @@
+[package]
+name = "tvm_test"
+version = "0.1.0"
+authors = ["maxtnuk <maxtnuk@gmail.com>"]
+edition = "2018"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+ndarray="0.12"
+serde = "1.0"
+serde_json = "1.0"
+tvm= { version = "0.1", path = "tvm/rust/tvm" }
+csv = "1.1"
+image = "0.20"
+lazy_static = "1.1.1"
+
+[build-dependencies]
+anyhow = "^1.0"
