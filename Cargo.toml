@@ -11,9 +11,11 @@ ndarray="0.12"
 serde = "1.0"
 serde_json = "1.0"
 tvm= { version = "0.1", path = "tvm/rust/tvm" }
+tvm-graph-rt={ version ="0.1",path ="tvm/rust/tvm-graph-rt"}
 csv = "1.1"
 image = "0.20"
 lazy_static = "1.1.1"
+anyhow = "^1.0"
 
 [build-dependencies]
 anyhow = "^1.0"

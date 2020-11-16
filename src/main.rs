@@ -66,7 +66,7 @@ fn main() -> anyhow::Result<()> {
         "input shape is {:?}, len: {}, size: {}",
         input.shape(),
         input.len(),
-        input.size(),
+        input.size().unwrap_or(0),
     );
 
     let graph = fs::read_to_string(concat!(env!("CARGO_MANIFEST_DIR"), "/deploy_graph.json"))
@@ -92,13 +92,14 @@ fn main() -> anyhow::Result<()> {
     // prepare to get the output
     let output_shape = &[1, 1000];
     let output = NDArray::empty(output_shape, Context::cpu(0), DataType::float(32, 1));
-    graph_rt.get_output_into(0, output.clone())?;
+    
+    graph_rt.get_output_into(0, &output)?;
 
     // flatten the output as Vec<f32>
-    let output = output.to_vec::<f32>()?;
+    let output_vec = output.to_vec::<f32>()?;
 
     // find the maximum entry in the output and its index
-    let (argmax, max_prob) = output
+    let (argmax, max_prob) = output_vec
         .iter()
         .copied()
         .enumerate()
